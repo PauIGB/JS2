@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>coffee machine</title>
+    <style>
+    .error {color: red;}
+    </style>
+</head>
+<body>
+
+<div class="block">
+    <h1>Coffe machine</h1>
+    <button id="start">Приготовить кофе</button>
+    <button id="refuse">Отменить</button>
+    <span id="error"></span>
+
+</div>
+<script>
+    // Добавить зерна
+    // Добавить проверку на пустую кофеварку
+    // Добавить кнопку stop (реализовать метод stop для кофеварки)
+    let stop = true;
+    const block =document.querySelector(".block");
+    function CoffeeMachine(power) { 
+
+        const maxTemp = 90;
+        const waterHeatCapacity = 4200;
+        const minWaterAmount = 5;
+        const maxWaterAmount = 100;
+        const minBeansAmount = 2;
+        const maxBeansAmount = 200;
+        let waterAmmount = 0;
+        let beansAmount = 0; 
+        this.addWater = function (newAmount) {
+            if (newAmount >= minWaterAmount) {
+                waterAmmount += newAmount;
+                if (waterAmmount > maxWaterAmount) {                    
+                    block.innerHTML += "<span class='error'>воды слишком много</span>";                 
+                    }
+            } else {
+                block.innerHTML += "<span class='error'>добавьте воды</span>";                
+            }            
+        };
+        this.addBeans = function (newAmount) {
+            if (newAmount >= minBeansAmount) {
+                beansAmount += newAmount;
+                if (beansAmount > maxBeansAmount) {                    
+                    block.innerHTML += "<span class='error'>слишком много зерен</span>";                
+                    }
+            } else {
+                block.innerHTML += "<span class='error'>добавьте зерен</span>";                
+            }            
+        };  
+        let calcBoilTime = function() { return (waterAmmount * waterHeatCapacity * maxTemp) / power};
+        this.getBoilTime = function () {
+
+            return calcBoilTime();
+
+        };   
+        this.launch = function () {            
+            launchBtn = setTimeout( function () {                
+                block.innerHTML += "<div>Кофе готов!</div>"; 
+            }, calcBoilTime());                     
+        };
+        this.stopBtn = function () {
+            clearTimeout(launchBtn);
+        }
+    }
+
+    const vitek = new CoffeeMachine(8000);
+
+    vitek.addWater(50);
+    vitek.addBeans(2);
+    const start = document.getElementById("start");
+    start.addEventListener("click", function () {  
+        vitek.launch();
+        console.log(vitek.getBoilTime()); 
+
+    } );
+
+   const refuse = document.getElementById("refuse");
+    refuse.addEventListener("click", function () {
+        vitek.stopBtn();
+        console.log("отмена операции"); 
+    } );
+
+
+</script>
+</body>
+</html>
