@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Lesson3</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<style>
+		h1 {
+			text-align: center;
+		}
+		h2 {
+			text-align: center;
+			border-bottom: 1px solid #ccc;		
+			padding-bottom: 10px;
+		}
+		nav {
+			text-align: center;
+		}
+		.container {
+			margin-top: 20px;
+			padding: 10px 50px;
+		}
+		.form {
+			max-width: 700px;
+			margin: 0 auto;
+		}
+		.buttons {
+			text-align: center;
+		}
+		.text-block {
+			white-space: pre-wrap;
+		}
+		.bg--red {
+			background: tomato;
+			border-color: tomato;
+		}
+		.bg--red:hover
+		 {
+			background-color: rgba(255, 0, 0, 0.6);
+			border-color: rgba(255, 0, 0, 0.6);
+		}
+		.info {
+			white-space: pre-wrap;
+		}
+		.bd--red {
+			border: 2px solid red;
+		}
+		script {
+			display: block;
+			font-family: monospace;
+			white-space: pre;
+		}
+		.warning {
+			display: none;
+		}
+		.warning.d--red {
+			display: block;
+			color: red!important;
+		}
+
+	</style>
+</head>
+<body>
+	<h1>Lesson 3, homework, <strong>KARPOV PAVEL</strong></h1>
+	<nav>
+		<a href="#text" class="btn-primary btn-lg badge-info">#1 Text</a>
+		<a href="#form" class="btn-primary btn-lg badge-info">#2 Form</a>
+		<a href="#script" class="btn-primary btn-lg badge-info">Script</a>
+		<a href="#script" class="btn-primary btn-lg badge-info">Info</a>
+	</nav>
+	<div class="container border rounded">
+		<h2>Урок 3. Регулярные выражения</h3>
+		<p class="info">
+			1. У вас есть большой текст, в котором для обозначения диалогов используются одинарные кавычки. Придумать шаблон, который меняет одинарные кавычки на двойные.
+			2. Улучшить шаблон таким образом, чтобы конструкции типа aren’t не меняли одинарную кавычку на двойную.
+			3. Создать форму обратной связи с полями: Имя, Телефон, e-mail, текст, кнопка «Отправить».
+			** - При нажатии на кнопку «Отправить» произвести валидацию полей следующим образом:
+			- Имя содержит только буквы;
+			** - Телефон подчиняется шаблону +7(000)000-0000;**
+			** - E-mail выглядит как mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru**
+			** - Текст произвольный;**
+			** - В случае не прохождения валидации одним из полей необходимо выделять это поле красной рамкой и сообщать пользователю об ошибке.**
+		</p>
+	</div>
+	<div class="container border rounded">
+		<h2 id="text">TEXT</h2>
+		<p class="text-block" id='text-block'>
+		I have an appointment with my hairdresser today. It has been too long since I had my hair cut. My bangs were too long, I had split ends and my roots were showing. I was a mess!
+		I arrived for my appointment and I told the receptionist that I was there for an appointment with Mark. She told me that he was finishin' up with another client and that he'd be with me soon. About 10 minutes later, he came over to where I was sitting and took me back to his station.
+		Mark: 'Hi, how have you been? You're looking good.'
+		Lucy: 'Thanks. I've been great. Thanks for fitting me in today.'
+		Mark: 'No problem. So, tell me, what do you want to have done today?'
+		Lucy: 'I need a trim.'
+		Mark: 'Okay. Let's see how short do you want me to cut it? Shoulder length? Chin length?'
+		Lucy: 'I'd like to take it up about two inches in the back and the bangs should fall just under my eyebrows.'
+		Mark: 'Okay, I really think that's a good length for your face shape.'
+		Just as I had hoped, Mark did a great job with my hair. I paid the receptionist and made sure I gave him a big tip. Anyone who can do wonders with my crazy hair definitely deserves it!</p>
+		<div class="buttons">
+			<button class="btn btn-primary" id="semi-change">Заменить кавычки диалогов</button>
+			<button class="btn btn-primary bg--red" id="semi-return">Вернуть прежний текст</button>
+		</div>
+		
+	</div>
+	<div class="container border rounded">
+		<h2 id="form">FORM</h2>
+		<form action="" method="POST" class="form">
+			<div class="form-group">
+				<label for="name">Your name</label>
+				<input type="text" class="form-control" id="name" placeholder="Введите Имя (можете также указать Фамилию и Отчество)" required>
+				<small id="nameHelp" class="form-text text-muted warning">Имя должно содержать ТОЛЬКО русские или английские буквы, использование других символов недопустимо. Строка НЕ может начинаться и заканчиватся пробелом.</small>
+			</div>
+			<div class="form-group">
+				<label for="tel">Your phone</label>
+				<input type="tel" class="form-control" id="tel" placeholder="Введите Ваш телефон: +7(000)000-0000" required>
+				<small id="telHelp" class="form-text text-muted warning">Введите телефон в следующем формате: +7(000)000-0000</small>
+			</div>
+			<div class="form-group">
+				<label for="email">Email address</label>
+				<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите email" required>
+				<small id="emailHelp" class="form-text text-muted warning">Введите email в одном из следующих форматов: mymail@mail.ru or my.mail@mail.ru or my-mail@mail.ru</small>
+			</div>
+			<div class="form-group">
+			    <label for="exampleFormControlTextarea1">Type text here</label>
+			    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  			</div>
+			<div class="buttons">
+				<button type="submit" class="btn btn-primary" id="submit">Submit</button>
+				<button type="reset" class="btn btn-primary bg--red">Reset</button>
+			</div>
+		</form>
+	</div>
+	
+	<script contenteditable class="container border rounded" id="script">
+		                         //TEXT//
+		
+		const textBlock = document.querySelector('#text-block');
+
+		const bntSemiChange = document.querySelector('#semi-change');
+		const btnSemiReturn = document.querySelector('#semi-return');
+
+		const textTemplate = /(?<=\s)'|('$)|('^)/gm;
+
+		bntSemiChange.onclick = () => textBlock.innerHTML = textBlock.innerHTML.replace(textTemplate,'"');
+		btnSemiReturn.onclick = () => textBlock.innerHTML = textBlock.innerHTML.replace(/"/g,"'");
+								
+								//FORM//
+		
+		const name = document.querySelector('#name');
+		const tel = document.querySelector('#tel');
+		const email = document.querySelector('#email');
+
+		const warning = document.querySelectorAll('.container .form .form-group .warning');		
+
+		const submit = document.querySelector('#submit');
+
+
+		const nameTemplate = /^([a-zа-яё].{1})(([a-zа-яё])|(\s))*([a-zа-яё].{0})$/gim;
+		const telTemplate = /^((\+\d)(\(\d{3}\))(\d{3})-(\d{4}))$/gm;
+		const emailTemplate = /^([a-z\.-]+)(@)([a-z\.-]+)\.([a-z]{2,3})$/gim;
+
+		function validation (template, input) {
+			if (!template.test(input.value)) {
+				input.classList += " bd--red";
+				warning.classList += " d--red";
+			}
+		};
+
+		submit.addEventListener ('click', function () {
+				validation(nameTemplate, name);
+				validation(telTemplate, tel);
+				validation(emailTemplate, email);
+			}
+		);
+
+	</script>
+	
+</body>
+</html>
