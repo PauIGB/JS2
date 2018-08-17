@@ -65,8 +65,7 @@
 	<nav>
 		<a href="#text" class="btn-primary btn-lg badge-info">#1 Text</a>
 		<a href="#form" class="btn-primary btn-lg badge-info">#2 Form</a>
-		<a href="#script" class="btn-primary btn-lg badge-info">Script</a>
-		<a href="#script" class="btn-primary btn-lg badge-info">Info</a>
+		<a href="#script" class="btn-primary btn-lg badge-info">Script</a>	
 	</nav>
 	<div class="container border rounded">
 		<h2>Урок 3. Регулярные выражения</h2>
@@ -156,16 +155,17 @@
 		const emailTemplate = /^([a-z\.-]+)(@)([a-z\.-]+)\.([a-z]{2,3})$/im;
 
 		function validation (template, input, warningId) {
-            if (template.test(input.value) === false)  {
+            if (!template.test(input.value))  {
                 if (!input.classList.contains("bd--red") && !warningId.classList.contains("d--red")) {                 
                     input.classList += " bd--red";
-                    warningId.classList += " d--red";                  
+                    warningId.classList += " d--red"; 
+                    input.setCustomValidity("Invalid field.");
                 }
-			} else {
-                input.classList.remove("bd--red");
-				warningId.classList.remove("d--red");            
-                
-            }
+                } else {
+                    input.classList.remove("bd--red");
+                    warningId.classList.remove("d--red");
+                    input.setCustomValidity("");
+                }
 		};
 
 		submit.addEventListener ('click', function () {
