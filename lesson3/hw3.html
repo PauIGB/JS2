@@ -20,6 +20,9 @@
 			margin-top: 20px;
 			padding: 10px 50px;
 		}
+        .yellow {
+            background-color: yellow;
+        }
 		.form {
 			max-width: 700px;
 			margin: 0 auto;
@@ -139,8 +142,8 @@
 
 		const textTemplate = /(?<=\s)'|('$)|('^)/gm;
 
-		bntSemiChange.onclick = () => textBlock.innerHTML = textBlock.innerHTML.replace(textTemplate,'"');
-		btnSemiReturn.onclick = () => textBlock.innerHTML = textBlock.innerHTML.replace(/"/g,"'");
+		bntSemiChange.onclick = () => textBlock.innerHTML = textBlock.innerHTML.replace(textTemplate,'<span class="yellow">"</span>');
+		btnSemiReturn.onclick = () => textBlock.innerHTML = textBlock.innerHTML.replace(/<span class="yellow">"<\/span>/g,"'");
 								
 								//FORM//
 		
