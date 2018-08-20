@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson4 Karpov</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+     <style>
+     body {
+         color: #333;
+     }
+        .tabs {
+                     
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+         .tabs__item {
+            padding: 10px 30px;
+            border: 1px solid #d68f69;            
+            cursor: pointer;
+            border-bottom: none;            
+            margin: 0 10px;           
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            margin-bottom: -1px;
+        }
+        .tab--active {
+            background: tomato;
+            color: #fff;
+            box-shadow: 2px 0px 3px grey;
+         }
+         .content__item {
+            border: 1px solid #000;
+            display: none;
+         }
+        .content__active {
+            display: block;
+            box-shadow: 3px 3px 10px grey;
+         }
+         script {
+			display: block;
+			font-family: monospace;
+			white-space: pre;
+		}
+        h1 {
+			text-align: center;
+		}
+		h2 {
+			text-align: center;
+			border-bottom: 1px solid #ccc;		
+			padding-bottom: 10px;
+		}
+
+		.container {		
+			padding: 30px 50px;
+            border: 2px solid tomato;
+		}
+       
+
+		.form {
+			max-width: 700px;
+			margin: 0 auto;
+		}
+		.buttons {
+			text-align: center;
+		}
+		.text-block {
+			white-space: pre-wrap;
+		}
+		.bg--red {
+			background: tomato;
+			border-color: tomato;
+		}
+		.bg--red:hover {
+			background-color: rgba(255, 0, 0, 0.6);
+			border-color: rgba(255, 0, 0, 0.6);
+		}
+		.info {
+			white-space: pre-wrap;        
+		}
+		.bd--red {
+			border: 2px solid red;
+		}
+		script {
+			display: block;
+			font-family: monospace;
+			white-space: pre;
+		}
+		.warning {
+			display: none;
+		}
+		.warning.d--red {
+			display: block;
+			color: red!important;
+		}
+        
+    </style>
+</head>
+<body>
+    <h1>Lesson 4, homework, <strong>KARPOV PAVEL</strong></h1>
+    <nav>
+        <ul class="tabs">
+            <li class="tabs__item tab--active">Info</li>
+            <li class="tabs__item">Form</li>
+            <li class="tabs__item">Script</li>
+        </ul>
+    </nav>
+    <div class="content">
+        
+        <div class="content__item container rounded info content__active">
+            <h2>Урок 4. Введение в jQuery</h2>
+            <p class="info">
+                1) С помощью jQuery создать контрол, работающий с вкладками.
+                Пример - http://dimox.name/examples/universal-jquery-tabs-script/ . 
+                Можно использовать любую анимацию, методы show, hide и подобные. Код примера желательно не смотреть.
+                
+                2) В форму обратной связи добавить возможность выбора города обращения. Сам список должен загружаться после загрузки страницы через AJAX.
+                
+                3) * Список из п.2 превратить в текстовое поле-автокомплит. Если пользователь ввёл 3 и более символов, нужно подгрузить список городов и показать подходящие по вводу. При клике на подходящий город, ввести его полное название в текстовое поле.
+            </p>
+            <div id="test"></div>
+        </div>
+        <div class="content__item container rounded">
+        <h2 id="form">FORM</h2>
+            <form action="" method="POST" class="form">
+                <div class="form-group">
+                    <label for="name">Your name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Введите Имя (можете также указать Фамилию и Отчество)" required>
+                    <small id="nameHelp" class="form-text text-muted warning">Имя должно содержать ТОЛЬКО русские или английские буквы, использование других символов недопустимо. Строка НЕ может начинаться и заканчиватся пробелом.</small>
+                </div>
+                <div class="form-group">
+                    <label for="tel">Your phone</label>
+                    <input type="tel" class="form-control" id="tel" placeholder="Введите Ваш телефон: +7(000)000-0000" required>
+                    <small id="telHelp" class="form-text text-muted warning">Введите телефон в следующем формате: +7(000)000-0000</small>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите email" required>
+                    <small id="emailHelp" class="form-text text-muted warning">Введите email в одном из следующих форматов: mymail@mail.ru or my.mail@mail.ru or my-mail@mail.ru</small>
+                </div>
+                <div class="form-group">
+                    <label for="city">Choose your city</label>
+                    <select class="form-control" id="city" autocomplete>
+                      <option diabled selected>Выберите Ваш город и списка</option>      
+                    </select>
+                </div>              
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Type text here</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                    <button type="reset" class="btn btn-primary bg--red">Reset</button>
+                </div>
+            </form>
+        
+        </div>
+    </div> 
+  
+    <script contenteditable class="container rounded content__item" id="script">
+        
+        // JQuery
+        
+        $(document).ready(function() {
+            
+            //ВКЛАДКИ
+            
+            const tabsItem = $('.tabs__item');
+            const contentItem = $('.content__item');
+            tabsItem.click(function () {
+                tabsItem.removeClass('tab--active');
+                $(this).addClass('tab--active');
+                contentItem.removeClass('content__active');
+                contentItem.eq($(this).index()).addClass('content__active');
+            })  
+            
+            //ФОРМА JQuery
+            
+            $.ajax({
+                url: 'http://89.108.65.123/cities',
+                type: 'get',
+                dataType: 'json',
+                success: function(data) {
+                    data.forEach((item) => {                        
+                        $('<option/>').text(item.name).attr('value', item.name ).appendTo('#city');                            
+                    })                     
+                },
+                error: function(err){
+                    console.error(err)
+                }
+            });         
+        })
+////////////////////////////////////////////////////////////////////////////////////////        
+            // ВАЛИДАЦИЯ ФОРМЫ (JS, предыдущее занятие)
+        
+        const name = document.querySelector('#name');
+		const tel = document.querySelector('#tel');
+		const email = document.querySelector('#email');
+		const submit = document.querySelector('#submit');
+ 
+        const nameTemplate = /^([a-zа-яё].{1})(([a-zа-яё])|(\s))*([a-zа-яё].{0})$/im;
+		const telTemplate = /^((\+\d)(\(\d{3}\))(\d{3})-(\d{4}))$/m;
+		const emailTemplate = /^([a-z\.-]+)(@)([a-z\.-]+)\.([a-z]{2,3})$/im;
+
+		function validation (template, input, warningId) {
+            if (!template.test(input.value))  {
+                if (!input.classList.contains("bd--red") && !warningId.classList.contains("d--red")) {                 
+                    input.classList += " bd--red";
+                    warningId.classList += " d--red"; 
+                    input.setCustomValidity("Invalid field.");
+                }
+                } else {
+                    input.classList.remove("bd--red");
+                    warningId.classList.remove("d--red");
+                    input.setCustomValidity("");
+                }
+		};
+
+		submit.addEventListener ('click', function () {
+				validation(nameTemplate, name, nameHelp);
+				validation(telTemplate, tel, telHelp);
+				validation(emailTemplate, email, emailHelp);
+			}
+		);
+    
+    </script>
+    
+</body>
+</html>
