@@ -215,23 +215,17 @@
             }           
 //            DELETE
             function delAjax(item) {
-                $.ajax({
+               $.ajax({
                     url: `${baseUrl}/comments?comment_id=${item.comment_id}`,
                     type: 'DELETE',
                     dataType: 'json',
                     success: function() {                                        
                         console.log(`element ${item.comment_id} deleted`)
                         getAjax();
-                    },
-                    error: function(err) {
-                        console.error(err);
                     }                                    
-                })               
-                
+                })   
             }            
             
-            
-
 //          ОБРАБОТЧКИКИ СОБЫТИЙ
 //            Добавление коммента  
             $(submitBtn).click(() => postAjax()); 
@@ -252,7 +246,7 @@
                     class: 'delete-btn',
                     html: 	'&#215;',
                     id: 'del-${item.comment_id}',
-                    click: (item) => delAjax(item)                  
+                    click: () => delAjax(item)                  
                 }).appendTo(commentsArea)
             }
             
