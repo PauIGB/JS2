@@ -214,7 +214,21 @@
                 })
             }           
 //            DELETE
-            
+            function delAjax(item) {
+                $.ajax({
+                    url: `${baseUrl}/comments?comment_id=${item.comment_id}`,
+                    type: 'DELETE',
+                    dataType: 'json',
+                    success: function() {                                        
+                        console.log(`element ${item.comment_id} deleted`)
+                        getAjax();
+                    },
+                    error: function(err) {
+                        console.error(err);
+                    }                                    
+                })               
+                
+            }            
             
             
 
@@ -238,21 +252,7 @@
                     class: 'delete-btn',
                     html: 	'&#215;',
                     id: 'del-${item.comment_id}',
-                    click: () =>
-                    function() {
-                        $.ajax({
-                            url: `${baseUrl}/comments?comment_id=${item.comment_id}`,
-                            type: 'DELETE',
-                            dataType: 'json',
-                            success: function() {                                        
-                                console.log(`element ${item.comment_id} deleted`)
-                                getAjax();
-                            },
-                            error: function(err) {
-                                console.error(err);
-                            }                                    
-                        })
-                    }                            
+                    click: (item) => delAjax(item)                  
                 }).appendTo(commentsArea)
             }
             
