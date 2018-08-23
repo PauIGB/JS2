@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson5 Karpov</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+     <style>
+     body {
+         color: #333;
+     }
+        .tabs {
+                     
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+         .tabs__item {
+            padding: 10px 30px;
+            border: 1px solid #d68f69;            
+            cursor: pointer;
+            border-bottom: none;            
+            margin: 0 10px;           
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            margin-bottom: -1px;
+        }
+        .tab--active {
+            background: tomato;
+            color: #fff;
+            box-shadow: 2px 0px 3px grey;
+         }
+         .content__item {
+            border: 1px solid #000;
+            display: none;
+         }
+        .content__active {
+            display: block;
+            box-shadow: 3px 3px 10px grey;
+         }
+         script {
+			display: block;
+			font-family: monospace;
+			white-space: pre;
+		}
+        h1 {
+			text-align: center;
+		}
+		h2 {
+			text-align: center;
+			border-bottom: 1px solid #ccc;		
+			padding-bottom: 10px;
+		}
+
+		.container {		
+			padding: 30px 50px;
+            border: 2px solid tomato;
+		} 
+	
+		.buttons {
+			text-align: center;
+		}
+		.text-block {
+			white-space: pre-wrap;
+		}
+		
+		.info {
+			white-space: pre-wrap;        
+		}
+		.bd--red {
+			border: 2px solid red;
+		}
+		script {
+			display: block;
+			font-family: monospace;
+			white-space: pre;
+		}
+        .like-btn,
+        .delete-btn {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .like-btn:hover,
+        .delete-btn:hover {
+            color: red;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <h1>Lesson 5, homework, <strong>KARPOV PAVEL</strong></h1>
+    <nav>
+        <ul class="tabs">
+            <li class="tabs__item tab--active">Comments</li>
+            <li class="tabs__item">Info</li>
+            <li class="tabs__item">Script</li>
+        </ul>
+    </nav>
+    <div class="content">       
+        
+        <div class="content__item container rounded content__active">
+            <h2 id="form">Comments</h2>
+                <div id="comments-area" class="border rounded"></div>
+                <textarea class="form-control" id="comment-input" rows="3"></textarea>
+                <button type="submit" class="btn btn-primary" id="submit-btn">Опубликовать</button>        
+            </div>
+        </div>   
+    <div class="content__item container rounded info ">
+            <h2>Урок 5. Взаимодействие компонентов страницы, практика</h2>
+            <p class="info">
+                1. Написать метод удаления товара из корзины.
+                2. Создать модуль сбора отзывов:
+                a) модуль может выводить отзывы (пока из json-заглушки);
+                b) модуль может добавлять отзывы;
+                c) модуль может одобрять отзывы;
+                d) модуль может удалять отзывы;
+                e) модуль подчиняется следующим соглашениям.
+
+                | Название обмена | Добавить отзыв |
+                |---------------------------------|-----------------------------------------------------------------|
+                | URL | review.add.json |
+                | Тип запроса | POST, asynchronous |
+                | Передаваемые данные | {"id_user" : 123,“text” : “”} |
+                | Ожидаемый ответ | {result: 1, userMessage: "Ваш отзыв был передан на модерацию" } |
+                | Ответ в случае системной ошибки | {result : 0, error_message : “Сообщение об ошибке”} |
+
+                | Название обмена | Одобрить отзыв |
+                |---------------------------------|-----------------------------------------------------------|
+                | URL | review.submit.json |
+                | Тип запроса | POST, asynchronous |
+                | Передаваемые данные | {" id_comment" : 123} // ID отзыва, который одобряется |
+                | Ожидаемый ответ | {result: 1} |
+                | Ответ в случае системной ошибки | { result : 0, error_message : “Сообщение об ошибке” } |
+
+                | Название обмена | Удалить отзыв |
+                |---------------------------------|-------------------------------------------------------|
+                | URL | review.delete.json |
+                | Тип запроса | POST, asynchronous |
+                | Передаваемые данные | {"id_comment" : 123} // ID отзыва, который удаляется |
+                | Ожидаемый ответ | {result: 1} |
+                | Ответ в случае системной ошибки | { result : 0,error_message : “Сообщение об ошибке”} |
+
+                | Название обмена | Показать все отзывы |
+                |---------------------------------|------------------------------------------------------|
+                | URL | review.list.json |
+                | Тип запроса | POST, asynchronous |
+                | Передаваемые данные | {} |
+                | Ожидаемый ответ | {comments: [{id_comment: 123,text: ‘Текст отзыва’}]} |
+                | Ответ в случае системной ошибки | {result : 0,error_message : “Сообщение об ошибке”} |
+            </p>
+            <div id="test"></div>
+        </div>
+
+    <script contenteditable class="container rounded content__item" id="script">
+     
+        
+        $(document).ready(function() {
+            const commentsArea = $('#comments-area');
+            const commentInput = $('#comment-input');
+            const submitBtn = $('#submit-btn');             
+      
+            const baseUrl = 'http://89.108.65.123:8080';
+            
+            //AJAX requests
+//            GET
+        function getAjax (){
+            $.ajax({
+                url: `${baseUrl}/comments`,
+                type: 'GET',
+                dataType: 'json',                    
+                success: function(data) {
+                    commentsArea.html('');
+                        dataRender(data);
+                },
+                error: function(err) {
+                    console.error(err);
+                }
+            })         
+        }
+            
+//            POST
+            function postAjax() {
+                const comment = commentInput.val();
+                $.ajax({
+                    url: `${baseUrl}/comments?text=${comment}`,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function() {                       
+                        getAjax();
+                    },
+                    error: function(err) {
+                        console.error(err);
+                    }
+                })                
+            }
+//            PATCH
+            function patchAjax(item) {  
+                $.ajax({
+                    url: `${baseUrl}/comments?comment_id=${item.comment_id}`,
+                    type: 'PATCH',
+                    dataType: 'json',
+                    success: function() {                                        
+                        console.log(`element ${item.comment_id} liked`)
+                        getAjax();
+                    },
+                    error: function(err) {
+                        console.error(err);
+                    }
+                })
+            }           
+//            DELETE
+            
+            
+            
+
+//          ОБРАБОТЧКИКИ СОБЫТИЙ
+//            Добавление коммента  
+            $(submitBtn).click(() => postAjax()); 
+            
+            
+            
+            //фукнция Like
+            function likeBtn(item) {
+                $('<button/>', {
+                    class: 'like-btn',
+                    html: 	`&#x2661; ${item.likes}`,
+                    click: () => patchAjax(item)                        
+                }).appendTo(commentsArea)
+            };
+            
+            function delBtn(item) {
+                $('<button/>', {
+                    class: 'delete-btn',
+                    html: 	'&#215;',
+                    id: 'del-${item.comment_id}',
+                    click: () =>
+                    function() {
+                        $.ajax({
+                            url: `${baseUrl}/comments?comment_id=${item.comment_id}`,
+                            type: 'DELETE',
+                            dataType: 'json',
+                            success: function() {                                        
+                                console.log(`element ${item.comment_id} deleted`)
+                                getAjax();
+                            },
+                            error: function(err) {
+                                console.error(err);
+                            }                                    
+                        })
+                    }                            
+                }).appendTo(commentsArea)
+            }
+            
+            function dataRender(data){
+                data.forEach((item) => {                            
+                    $('<div/>', {
+                    class: 'comment-item border rounded',
+                    html: `
+                        <i>id пользоваетля:  ${item.comment_id}</i>
+                        <blockquote>${item.text}</blockquote>
+                    `                           
+                    }).appendTo(commentsArea)                          
+
+                    likeBtn(item);                           
+                    delBtn(item);
+                })                
+            }
+                        
+//            при загрузке страницы            
+            getAjax();     
+//                  
+                        
+            //ВКЛАДКИ            
+            const tabsItem = $('.tabs__item');
+            const contentItem = $('.content__item');
+            tabsItem.click(function () {
+                tabsItem.removeClass('tab--active');
+                $(this).addClass('tab--active');
+                contentItem.removeClass('content__active');
+                contentItem.eq($(this).index()).addClass('content__active');
+            }) 
+        })
+            
+    </script>
+    
+</body>
+</html>
