@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="owl.carousel.min.css">
+    <script src="owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <style>
+        .form {
+            border: 1px solid #222;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .text {
+            padding: 0.4rem;
+            margin-bottom: 1rem;
+        }
+        .feedbacks {
+            margin: 0 auto;
+            text-align: center;
+        }
+        .message {
+            font-style: italic;
+            color: brown
+        }
+        .user-info {
+            font-family: monospace;
+        }
+        h2 {
+            text-align: center;
+        }
+        .table {
+            margin: auto;
+            border-collapse: collapse; 
+        }
+        div#users-contain table td, 
+        div#users-contain table th { 
+            border: 1px solid #9f9f9f; 
+            padding: .6em 10px; text-align: left; }
+        .info {
+			white-space: pre-wrap;        
+		}
+        script {
+			display: block;
+			font-family: monospace;
+			white-space: pre;
+		}
+          
+    </style>
+</head>
+<body>
+<div class="tabs">
+   <ul>
+       <li><a href="#tab1">Info</a></li>
+       <li><a href="#tab2">Form</a></li>
+       <li><a href="#tab3">Slider</a></li>
+       <li><a href="#tab4">Script</a></li>
+   </ul>
+   
+    <div id="tab1" class="info">
+        Урок 6. jQuery UI и другие расширения jQuery
+            1) На сайте в форме обратной связи добавьте следующие поля:
+            a) поле даты рождения;
+            b) ошибочные поля подсветить с помощью какого-нибудь эффекта, например, Bounce.
+            2) Все возвращаемые ошибки выводить с помощью виджета Dialog.
+            3) Создать карусель популярных товаров в шапке.
+            4) * C помощью jQuery UI добавить возможность перемещать товар прямо в корзину мышью.
+    </div>       
+       
+    <div id="tab2">
+        <h2>Форма обратной связи</h2>
+        <p class="validateTips" title="Ошибка при заполнении формы"></p>
+        <form id="form" action="#" class="form ui-widget ui-corner-all ui-widget-shadow">
+            <label for="name">Имя*</label>
+            <input type="text" name="name" id="name" placeholder="Фамилия Имя Отчество" class="text ui-widget-content ui-corner-all">
+            <label for="email">Email*</label>
+            <input type="text" name="email" id="email" placeholder="example@email.com" class="text ui-widget-content ui-corner-all">
+            <label for="phone">Телефон*</label>
+            <input type="tel" name="phone" id="phone" placeholder="+7(000)000-0000" class="text ui-widget-content ui-corner-all">
+            <label for="city">Выберите Ваш город</label>
+            <input type="text" name="city" id="city" value="" class="text ui-widget-content ui-corner-all">  
+            <label for="birth">Дата рождения</label>
+            <input type="text" name="password" id="birth" value="" class="text ui-widget-content ui-corner-all"> 
+            <label for="textArea">Текст обращения</label>
+            <textarea name="textArea" id="textArea" class="text ui-widget-content ui-corner-all"></textarea>
+
+            <input type="submit" class="ui-state-default ui-corner-all" value="Отправить">
+        </form>
+        <div id="users-contain" class="ui-widget feedbacks">
+            <h4>Поступившие обращения:</h4>
+            <table id="users" class="ui-widget table">
+                <thead>
+                  <tr class="ui-widget-header ">
+                    <th>Имя</th>
+                    <th>Email</th>
+                    <th>Телефон</th>
+                    <th>Город</th>
+                    <th>Дата рождения</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="user-info">
+                    <td>Васисуалий</td>
+                    <td>vasya@example.com</td>
+                    <td>+7(000)000-0000</td>
+                    <td>Урюпинск</td>
+                    <td>01/01/1980</td>
+                  </tr>
+                  <tr class="message">
+                      <td colspan="5">Срочно верните деньги!!!!</td>
+                  </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="tab3">
+    <h2>Slider</h2>   
+       <div class="owl-carousel slider">
+          <div><img src="https://www.iphones.ru/wp-content/uploads/2017/09/0-27-1240x698.jpg" alt="">  </div>
+          <div><img src="https://www.iphones.ru/wp-content/uploads/2017/09/0-27-1240x698.jpg" alt="">  </div>
+          <div><img src="https://www.iphones.ru/wp-content/uploads/2017/09/0-27-1240x698.jpg" alt="">  
+        </div>
+
+
+
+<script contenteditable id="tab4">
+//    class input {
+//        constructor(inputField, regExp, warningText) {
+//            this.inputField = inputField;
+//            this.regExp = regExp;
+//            this.warningText = warningText;
+//        }
+//        checkRegexp(inputField, regExp, warningText) {
+//            if(!(this.regExp.test(this.inputField.val()))) {
+//                warning(warningText);
+//                this.inputField.addClass( "ui-state-error" ).effect('bounce');
+//                return false;
+//                
+//            } else {
+//                return true;
+//            }
+//        }
+//    }
+    $(document).ready(() => {
+        $('.tabs').tabs();
+         $(".slider").owlCarousel({
+              items: 1,
+              loop: true,
+              autoplay: true,
+              autoplayTimeout: 3000,
+              smartSpeed: 550
+          });
+        
+        
+        const form = $('#form');
+        //name
+        const name = $('#name');
+        const nameRegex = /^([a-zа-яё].{1})(([a-zа-яё])|(\s))*([a-zа-яё].{0})$/im;
+        const nameWarning = 'Имя должно содержать ТОЛЬКО русские или английские буквы, использование других символов недопустимо. Строка НЕ может начинаться и заканчиватся пробелом.';
+        //email
+        const email = $('#email');
+        const emailRegex = /^([a-z\d\.-]+)(@)([a-z\d\.-]+)\.([a-z]{2,3})$/im;
+        const emailWarning = 'Введите email в одном из следующих форматов: mymail@mail.ru or my.mail@mail.ru or my-mail@mail.ru';
+        //phone
+        const phone = $('#phone');
+        const phoneRegex = /^((\+\d)(\(\d{3}\))(\d{3})-(\d{4}))$/m;
+        const phoneWarning = 'Введите телефон в следующем формате: +7(000)000-0000';
+        
+        const city = $('#city');        
+        const birth = $('#birth');        
+        const textArea = $('#textArea')
+        
+        const allFields = $( [] ).add( name ).add( email ).add( phone );
+        const tips = $( ".validateTips" );
+        
+        autocomplete(city);
+        datepicker(birth);
+        
+        form.on('submit', (event) => {
+            event.preventDefault();            
+            addUser();
+
+        })
+        function checkRegexp(inputField, regExp, warningText) {
+            if(!(regExp.test(inputField.val()))) {
+                warning(warningText);
+                inputField.addClass( "ui-state-error" ).effect('bounce');
+                return false;
+                
+            } else {
+                return true;
+            }
+        }
+        function warning(warningText) {
+            tips.text(warningText).addClass( "ui-state-highlight" );
+            setTimeout(function() {
+                tips.removeClass("ui-state-highlight" )
+            }, 1500)
+            $(tips).dialog({
+            modal: true,            
+            buttons: {
+                'OK': function() {
+                    $(this).dialog('close');
+                }                
+            }
+        });
+        }
+        
+        function addUser() {
+            var valid = true;
+            allFields.removeClass( "ui-state-error" );
+            valid = valid && checkRegexp(name, nameRegex, nameWarning);
+            valid = valid && checkRegexp(email, emailRegex, emailWarning);
+            valid = valid && checkRegexp(phone, phoneRegex, phoneWarning);
+            if ( valid ) {
+            $( "#users tbody" ).append( `
+                <tr class="user-info">
+                <td>${name.val()}</td>
+                <td>${email.val()}</td>
+                <td>${phone.val()}</td>
+                <td>${city.val()}</td>
+                <td>${birth.val()}</td>
+                </tr>
+                <tr class="message">
+                <td colspan='5'>${textArea.val()}</td>
+                </tr>`
+            );}
+             return valid;            
+        }
+        
+        function datepicker (newEl) {
+            newEl.datepicker({
+            monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            dayNamesMin: [ 'ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'],
+            dateFormat: 'dd/mm/yy'
+               
+            }); 
+            newEl.attr('placeholder', 'dd/mm/yyyy');
+        }        
+        
+        function autocomplete(newEl) {
+           $.ajax({
+                url: 'http://89.108.65.123/cities',
+                dataType: 'json',
+                success: function(data) { 
+                    const source = new Array;
+                    data.forEach((item) => source.push(item.name));
+                    newEl.autocomplete({source});           
+                    newEl.attr('placeholder', source[0]);
+                }
+            })
+        }       
+        
+    })    
+    
+</script>
+</div>
+</body>
+</html>
