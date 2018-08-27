@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <title>Form</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="owl.carousel.min.css">
-    <script src="owl.carousel.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <style>
@@ -51,6 +49,39 @@
 			font-family: monospace;
 			white-space: pre;
 		}
+/*        slider*/
+        .slider .ui-widget-header {
+            background: none;
+            border: none;
+        }
+        .slider .ui-tabs .ui-tabs-nav li,
+        .slider .ui-tabs .ui-tabs-nav li.ui-tabs-active {
+            float: none;
+            margin: 0.2rem 0.6rem;
+            padding: 0;
+        }
+        .slider .ui-tabs-tab {
+            border-radius: 5px;
+            margin: 1rem;        }
+        .slider ul.dots.ui-tabs-nav.ui-corner-all.ui-helper-reset.ui-helper-clearfix.ui-widget-header {
+            display: flex;
+            justify-content: center;
+        }
+        .slider.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+            padding: 0;
+        }
+        .slider.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+            padding: 0.2rem;
+            font-size: 0.8rem;
+        }
+        .slider.ui-tabs.ui-corner-all.ui-widget.ui-widget-content {
+            text-align: center;          
+        }
+        .slider-item img {
+            display: block;
+            width: 100%;
+            max-height: 400px; 
+        }   
           
     </style>
 </head>
@@ -123,25 +154,29 @@
     
     <div id="tab3">
         <h2>Slider</h2>   
-           <div class="owl-carousel slider">
-              <div><img src="https://www.iphones.ru/wp-content/uploads/2017/09/0-27-1240x698.jpg" alt=""></div>
-              <div><img src="https://www.iphones.ru/wp-content/uploads/2017/09/0-27-1240x698.jpg" alt=""></div>
-              <div><img src="https://www.iphones.ru/wp-content/uploads/2017/09/0-27-1240x698.jpg" alt=""></div>
+        <div class="slider">           
+            <div class="slider-item">
+                <img src="https://i.ytimg.com/vi/tLaQx9WEc1I/maxresdefault.jpg" width="" height="" alt="MacBook Pro">
             </div>
+            <div class="slider-item">
+                <img src="https://i.ytimg.com/vi/koqaUFPfTGE/maxresdefault.jpg" width="" height="" alt="Iphone X">
+            </div>
+            <div class="slider-item">
+                <img src="https://i.ytimg.com/vi/RJK3XVVodVQ/maxresdefault.jpg" width="" height="" alt="Ipad Pro X">
+            </div>
+            <div class="slider-item">
+                <img src="https://thesurface.ru/wp-content/uploads/2017/03/macbook-pro-2017.jpg" width="" height="" alt="MacBook Air">
+            </div>
+            <ul class="dots"></ul>       
+        </div>
     </div>
 
 <script contenteditable id="tab4">
 
     $(document).ready(() => {
         $('.tabs').tabs();
-         $(".slider").owlCarousel({
-              items: 1,
-              loop: true,
-              autoplay: true,
-              autoplayTimeout: 3000,
-              smartSpeed: 550
-          });
         
+//        FORM
         
         const form = $('#form');
         //name
@@ -240,7 +275,28 @@
                     newEl.attr('placeholder', source[0]);
                 }
             })
-        }      
+        }
+//        SLIDER
+        const slider = $('.slider');
+            const dots = $('.dots');
+            const sliderLength = $('.slider img').length;
+            let timer = 0;
+            $('.slider-item').attr('id', ((i) => `item-${i}`));
+            for(let i = 0; i < sliderLength; i++) {
+                $('.dots').append(`
+                <li class="dots-item_${i}">
+                    <a href="#item-${i}">Slide#${(i+1)}</a>
+                </li>`);
+            }
+            $(slider).tabs({               
+                hide: true,
+                show: true
+                         
+            });
+             setInterval(() => {                
+                $(slider).tabs( "option", "active", timer );
+                (timer < sliderLength) ? timer++ : timer = 0;
+             }, 3000);   
         
     })    
     
