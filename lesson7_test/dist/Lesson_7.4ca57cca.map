@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.js"],"names":["hello","console","log"],"mappings":";AAAA,IAAMA,EAAQ,cACdC,QAAQC,IAAIF","file":"Lesson_7.4ca57cca.map","sourceRoot":"..","sourcesContent":["const hello = 'Hello world'\r\nconsole.log(hello)\r\n"]}
