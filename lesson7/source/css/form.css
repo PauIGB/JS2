@@ -1,0 +1,32 @@
+.form {
+    border: 1px solid #222;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+}
+.text {
+    padding: 0.4rem;
+    margin-bottom: 1rem;
+}
+.feedbacks {
+    margin: 0 auto;
+    text-align: center;
+}
+.message {
+    font-style: italic;
+    color: brown
+}
+.user-info {
+    font-family: monospace;
+}
+.table {
+    margin: auto;
+    border-collapse: collapse; 
+}
+div#users-contain table td, 
+div#users-contain table th { 
+    border: 1px solid #9f9f9f; 
+    padding: .6em 10px; text-align: left; 
+}

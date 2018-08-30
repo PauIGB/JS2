@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gulp, lesson 7</title>
+    <script src="js/bundle.min.js"></script>
+    <link rel="stylesheet" href="css/bundle.min.css">
+    
+    <link rel="stylesheet" href="css/bundle.min.css">
+</head>
+<body>
+<div class="tabs">
+   <ul>
+       <li><a href="#tab1">Info</a></li>
+       <li><a href="#tab2">Form</a></li>
+       <li><a href="#tab3">Slider</a></li>
+   </ul>
+   
+    <div id="tab1" class="info">
+        Урок 7. Полезные библиотеки, сборщики и шаблонизаторы
+            1. Написать задачу gulp для сборки проекта. Ведь мы уже используем как минимум несколько файлов JS.
+            2. Составить скрипт подготовки сайта к релизу.
+            3. * Научиться создавать CSS-сборки наподобие JS.
+    </div>       
+       
+    <div id="tab2">
+        <h2>Форма обратной связи</h2>
+        <p class="validateTips" title="Ошибка при заполнении формы"></p>
+        <form id="form" action="#" class="form ui-widget ui-corner-all ui-widget-shadow">
+            <label for="name">Имя*</label>
+            <input type="text" name="name" id="name" placeholder="Фамилия Имя Отчество" class="text ui-widget-content ui-corner-all">
+            <label for="email">Email*</label>
+            <input type="text" name="email" id="email" placeholder="example@email.com" class="text ui-widget-content ui-corner-all">
+            <label for="phone">Телефон*</label>
+            <input type="tel" name="phone" id="phone" placeholder="+7(000)000-0000" class="text ui-widget-content ui-corner-all">
+            <label for="city">Выберите Ваш город</label>
+            <input type="text" name="city" id="city" value="" class="text ui-widget-content ui-corner-all">  
+            <label for="birth">Дата рождения</label>
+            <input type="text" name="password" id="birth" value="" class="text ui-widget-content ui-corner-all"> 
+            <label for="textArea">Текст обращения</label>
+            <textarea name="textArea" id="textArea" class="text ui-widget-content ui-corner-all"></textarea>
+
+            <input type="submit" class="ui-state-default ui-corner-all" value="Отправить">
+        </form>
+        <div id="users-contain" class="ui-widget feedbacks">
+            <h4>Поступившие обращения:</h4>
+            <table id="users" class="ui-widget table">
+                <thead>
+                  <tr class="ui-widget-header ">
+                    <th>Имя</th>
+                    <th>Email</th>
+                    <th>Телефон</th>
+                    <th>Город</th>
+                    <th>Дата рождения</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="user-info">
+                    <td>Васисуалий</td>
+                    <td>vasya@example.com</td>
+                    <td>+7(000)000-0000</td>
+                    <td>Урюпинск</td>
+                    <td>01/01/1980</td>
+                  </tr>
+                  <tr class="message">
+                      <td colspan="5">Срочно верните деньги!!!!</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> 
+    <div id="tab3">
+        <h2>Slider</h2>   
+        <div class="slider">           
+            <div class="slider-item">
+                <img src="https://i.ytimg.com/vi/tLaQx9WEc1I/maxresdefault.jpg" width="" height="" alt="MacBook Pro">
+            </div>
+            <div class="slider-item">
+                <img src="https://i.ytimg.com/vi/koqaUFPfTGE/maxresdefault.jpg" width="" height="" alt="Iphone X">
+            </div>
+            <div class="slider-item">
+                <img src="https://i.ytimg.com/vi/RJK3XVVodVQ/maxresdefault.jpg" width="" height="" alt="Ipad Pro X">
+            </div>
+            <div class="slider-item">
+                <img src="https://thesurface.ru/wp-content/uploads/2017/03/macbook-pro-2017.jpg" width="" height="" alt="MacBook Air">
+            </div>
+            <ul class="dots"></ul>       
+        </div>
+    </div>
+</div>
+</body>
+</html>

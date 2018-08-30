@@ -1,0 +1,4 @@
+$(document).ready(() => {
+        $('.tabs').tabs();
+})
+
