@@ -1,0 +1,81 @@
+function Container(id = '', className = '') {
+this.id = id;
+this.className = className;
+};
+
+Container.prototype.remove = function(selector) {    
+    if (selector.parentNode) {
+      selector.parentNode.removeChild(selector);
+    }
+}
+
+function Menu(id, className, menuItems) {
+    Container.apply(this, arguments);
+    this._menuItems = menuItems;
+}
+
+Menu.prototype._renderMenuItems = function () {    
+    let htmlArray = [];
+    this._menuItems.map((item, index) => {
+        if(Array.isArray(item, index)) {
+            item = new Menu("", "submenu", item);
+            this._menuItems[index-1].submenu = item.render();
+            htmlArray[index-1] = (this._menuItems[index-1].render());
+        } else {
+            htmlArray.push(item.render());
+        }    
+    });
+    return htmlArray.join('\n');    
+}
+
+Menu.prototype.render = function () {
+    return `
+        <ul id="${this.id}" class="${this.className}">
+          ${this._renderMenuItems()}
+        </ul>
+    `
+}
+
+function MenuItem(id, className, text = '', link = '', submenu = '') {
+    Container.apply(this, arguments);
+    this.text = text;
+    this.link = link;	
+    this.submenu = submenu;
+}
+
+MenuItem.prototype.render = function () {
+    return `
+        <li id="${this.id}" class="${this.className}">
+            <a href="${this.link}">${this.text}</a>
+            ${this.submenu}
+        </li>
+    `
+}
+
+let menuItems = [
+    new MenuItem('el1', 'menu-item', 'Главная', '#'),
+    new MenuItem('el2', 'menu-item', 'Меню', '#'),
+    [
+        new MenuItem('', 'submenu-item', 'Подменю #1', '#'),
+        new MenuItem('', 'submenu-item', 'Подменю #2', '#'),
+        [
+            new MenuItem('', 'subSubmenu-item', 'Подподменю #1', '#'),
+            new MenuItem('', 'subSubmenu-item', 'Подподменю #2', '#')
+        ]
+    ],
+    new MenuItem('el3', 'menu-item', 'Промо-акции', '#'),
+    new MenuItem('el3', 'menu-item', 'Личный кабинет', '#'),        
+    new MenuItem('el3', 'menu-item', 'Перейти в корзину', '#')
+
+];
+
+let menu = new Menu('menu', 'menu', menuItems);
+
+const nav = document.querySelector('.nav');
+nav.innerHTML = menu.render();
+
+        //удаление
+    //const i = new Container ();
+    //const c = document.querySelector('li');
+    //i.remove(c);    
+    //
