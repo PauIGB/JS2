@@ -26,11 +26,33 @@ describe("В поле phone возможна запись телефона то�
            assert.equal(check(template, " "), false)      
     })
    
-    const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz   [$&+,:;=?@#|'<>.-^*()%!]{}" 
+    const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz   [$&,:;=?@#|'<>.-^*()%!]{}" 
     for (i = 0; i < symbols.length; i++) {
         const symbol = symbols.charAt(i);
         it(`Проверка на наличие символа ${symbol} в поле phone`, () => {        
            assert.equal(check(template, symbol), false)      
         })
+    }
+})
+describe("В поле mail возможна запись только в следующем формате: mymail@mail.ru or my.mail@mail.ru or my-mail@mail.ru", () => {
+    const template = /^([a-z\.-]+)(@)([a-z\.-]+)\.([a-z]{2,3})$/im
+    it('Проверка email в формате: mymail@mail.ru', () => {        
+           assert.equal(check(template, 'mymail@mail.ru'), true)      
+    })
+    it('Проверка email в формате: my.mail@mail.ru', () => {        
+           assert.equal(check(template, 'my.mail@mail.ru'), true)      
+    })    
+    it('Проверка email в формате: my-mail@mail.ru', () => {        
+           assert.equal(check(template, 'my-mail@mail.ru'), true)      
+    })
+    it('Проверка на наличие пробелов', () => {        
+           assert.equal(check(template, " "), false)      
+    })
+   
+    const symbols = "[$&,:;=?#|'<>^*()%!]{}" 
+        
+    for (i = 0; i < symbols.length; i++) {
+        const symbol = symbols.charAt(i);
+        const letter = letters.charAt(0);
     }
 })
